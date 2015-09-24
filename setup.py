@@ -2,6 +2,7 @@ from setuptools import setup, find_packages
 from distutils import sysconfig
 import re
 
+print(sysconfig.get_python_lib())
 site_packages = re.match(
     r'.*(lib[\\/](python\d\.\d[\\/])?site-packages)',
     sysconfig.get_python_lib(),
