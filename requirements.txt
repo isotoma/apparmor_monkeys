@@ -9,4 +9,3 @@ py==1.4.30
 pyflakes==0.8.1
 pytest==2.8.0
 requests==2.7.0
-wsgiref==0.1.2
