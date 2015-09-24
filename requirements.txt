@@ -1,0 +1,13 @@
+-e .
+apparmor-monkeys==0.0.1
+argparse==1.2.1
+codecov==1.4.1
+coverage==4.0
+flake8==2.4.1
+mccabe==0.3.1
+pep8==1.5.7
+py==1.4.30
+pyflakes==0.8.1
+pytest==2.8.0
+requests==2.7.0
+wsgiref==0.1.2
