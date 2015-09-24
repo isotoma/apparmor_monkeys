@@ -1,5 +1,4 @@
 -e .
-apparmor-monkeys==0.0.1
 argparse==1.2.1
 codecov==1.4.1
 coverage==4.0
