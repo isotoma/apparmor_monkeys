@@ -70,3 +70,28 @@ This is used in several places:
    ``pkg_resources.require('myapp')[0].version``, which triggers it.
  * Gunicorn triggers it via a ``platform.system()`` in
    ``gunicorn.workers.workertmp`` before it even loads your code.
+
+
+Switching profiles
+------------------
+
+You can harden your AppArmor profiles further using ``change_profile`` to switch into a different profile after initialising your app.
+
+If using multiprocess gunicorn (i.e. synchronous gunicorn) then you can wrap
+your workers in their own specific profile. In your gunicorn config you can add
+a hook to do this::
+
+    from apparmor_monkeys import change_profile
+
+    def post_fork(server, worker):
+        change_profile("myapplication//worker")
+
+
+You can do this for celery too::
+
+    from apparmor_monkeys import change_profile
+    from celery import signals
+
+    @signals.worker_process_init.connect
+    def switch_apparmor_profile(sender=None, signal=None):
+        change_profile("tenselfservice-worker//worker")
