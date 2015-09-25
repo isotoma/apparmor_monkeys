@@ -3,7 +3,7 @@ from setuptools import setup, find_packages
 
 setup(
     name = 'apparmor_monkeys',
-    version = '0.0.1',
+    version='0.0.2.dev0',
     description = 'Monkeypatches to minimize the permissions required to run python under AppArmor',
     packages = find_packages(),
     include_package_data=True,
