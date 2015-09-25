@@ -36,9 +36,7 @@ you could:
    through that profile with a security professional.
 
 This package patches several stdlib API's to avoid ``subprocess`` usage,
-letting you keep your simple profiles and clean audit logs. The patching is
-automatic, using a ``pth`` file. These are loaded by ``site.py`` when python is
-starting.
+letting you keep your simple profiles and clean audit logs.
 
 
 ctypes vs ldconfig
@@ -70,6 +68,30 @@ This is used in several places:
    ``pkg_resources.require('myapp')[0].version``, which triggers it.
  * Gunicorn triggers it via a ``platform.system()`` in
    ``gunicorn.workers.workertmp`` before it even loads your code.
+
+
+Activating the monkey patches
+-----------------------------
+
+Manually
+~~~~~~~~
+
+As early in your code as possible do::
+
+    from apparmor_monkeys import patch_modules
+    patch_modules()
+
+
+Automatically via ``.pth`` hooks
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+And ``site-packages`` directory is scanned for ``.pth`` files. These are processed in order and are generally just a list of paths to add to ``sys.path``. However any ``import`` lines will be honoured.
+
+Create an ``apparmor-monkeys.pth`` in your virtualenvs ``site-packages`` directory containing::
+
+    import apparmor_monkeys; apparmor_monkeys.patch_modules()
+
+It must be on a single line for this trick to work.
 
 
 Switching profiles
